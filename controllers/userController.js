@@ -8,25 +8,25 @@ module.exports ={
         .catch((err) => res.status(500).json(err));
     },
 
-    // get a user by ID
-    getSingleUser(req, res) {
-        Users.findOne({_id})
-    },
+    // // get a user by ID
+    // getSingleUser(req, res) {
+    //     Users.findOne({_id})
+    // },
 
-    // create a new user
-    createUser(req, res) {
+    // // create a new user
+    // createUser(req, res) {
 
-    },
+    // },
 
-    // update a single user by id
-    updateUser(req, res) {
+    // // update a single user by id
+    // updateUser(req, res) {
 
-    },
+    // },
 
-    // delete a user by id
-    deleteUser(req, res) {
-        
-    }
+    // // delete a user by id
+    // deleteUser(req, res) {
+
+    // }
 }
 
 
