@@ -72,7 +72,7 @@ module.exports = {
   deleteFriend(req, res) {
     Users.findOneAndUpdate(
       { _id: req.params.id },
-      { $pull: { friends: { friendId: req.params.friendId } } },
+      { $pull: { friends: req.params.friendId } },
       {runValidators: true, new: true }
     )
     .then((user) => 
