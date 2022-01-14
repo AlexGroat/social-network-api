@@ -20,40 +20,54 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
 
-      // create a new user
-      createUser(req, res) {
-        Users.create(req.body)
-        .then((user) => res.json(user))
-        .catch((err) => res.status(500).json(err));
-      },
+  // create a new user
+  createUser(req, res) {
+    Users.create(req.body)
+      .then((user) => res.json(user))
+      .catch((err) => res.status(500).json(err));
+  },
 
-      // update a single user by id
-      updateUser(req, res) {
-        Users.findOneAndUpdate({ _id: req.params.id}, { $set: req.body }, { new: true, runValidators: true })
-        .then((user) => 
-          !user
-            ? res.status(404).json({ message: 'No user with this ID' })
-            : res.json(user)
-        )
-        .catch((err) => res.status(500).json(err))
-
-      },
-
-      // delete a user by id
-      deleteUser(req, res) {
-        Users.findByIdAndRemove({ _id: req.params.id})
-        .then((user) => 
+  // update a single user by id
+  updateUser(req, res) {
+    Users.findOneAndUpdate(
+      { _id: req.params.id },
+      { $set: req.body },
+      { new: true, runValidators: true }
+    )
+      .then((user) =>
         !user
-          ? res.status(404).json({ message: 'No user with this ID' })
-          : res.json({ message: 'User has been removed'})
+          ? res.status(404).json({ message: "No user with this ID" })
+          : res.json(user)
+      )
+      .catch((err) => res.status(500).json(err));
+  },
+
+  // delete a user by id
+  deleteUser(req, res) {
+    Users.findByIdAndRemove({ _id: req.params.id })
+      .then((user) =>
+        !user
+          ? res.status(404).json({ message: "No user with this ID" })
+          : res.json({ message: "User has been removed" })
+      )
+      .catch((err) => res.status(500).json(err));
+  },
+
+  // add a friend
+  addFriend(req, res) {
+    console.log('Say hello to your new friend');
+    console.log(req.body);
+    Users.findOneAndUpdate({ _id: req.params.id }, { $addToSet: { friends: req.params.friendId } }, { runValidators: true, new: true })
+        .then((user) =>
+            !user ?
+            res
+            .status(404)
+            .json({ message: 'No user with that ID' }) :
+            res.json({ message: "Enjoy your new friend" })
         )
-        .catch((err) => res.status(500).json(err))
-      },
+        .catch((err) => res.status(500).json(err));
+},
 
-  //     // add a friend
-  //     addFriend(req, res) {
-
-  //     },
 
   //     // delete a friend
   //     deleteFriend(req, res) {
