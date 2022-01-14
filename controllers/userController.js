@@ -39,10 +39,16 @@ module.exports = {
 
       },
 
-  //     // delete a user by id
-  //     deleteUser(req, res) {
-
-  //     },
+      // delete a user by id
+      deleteUser(req, res) {
+        Users.findByIdAndRemove({ _id: req.params.id})
+        .then((user) => 
+        !user
+          ? res.status(404).json({ message: 'No user with this ID' })
+          : res.json({ message: 'User has been removed'})
+        )
+        .catch((err) => res.status(500).json(err))
+      },
 
   //     // add a friend
   //     addFriend(req, res) {
