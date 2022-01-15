@@ -26,7 +26,7 @@ module.exports = {
     console.log(body);
     // console log user id and the content of the thought json
     Thoughts.create(body)
-    // find the id of the user and push a new thought into the thoughts
+    // find the id of the user and push a new thought into the user thoughts array
       .then(({ _id }) => {
         return Users.findOneAndUpdate(
           { _id: params.id },
