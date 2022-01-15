@@ -16,7 +16,7 @@ router.route('/')
 .post(createThought);
 
 // api/thoughts/:id
-router.route('/:id')
+router.route('/:thoughtId')
 .get(getSingleThought);
 
 module.exports = router;
