@@ -72,6 +72,21 @@ module.exports = {
   },
 
   // create a new reaction
+  createReaction(req, res) {
+    console.log("You are creating a reaction");
+    console.log(req.body, req.params.thoughtId);
+
+    Thoughts.findOneAndUpdate(
+      { _id: req.params.thoughtId },
+      { $push: { reactions: req.body } },
+      { runValidators: true, new: true })
+      .then((thought) =>
+        !thought
+          ? res.status(404).json({ message: "No thought found with that ID" })
+          : res.json({ message: "You have added a new thought" })
+      )
+      .catch((err) => res.status(500).json(err));
+  },
 
   // delete a reaction by reaction ID
 };
