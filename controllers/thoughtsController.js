@@ -73,20 +73,31 @@ module.exports = {
 
   // create a new reaction
   createReaction(req, res) {
-    console.log("You are creating a reaction");
-    console.log(req.body, req.params.thoughtId);
-
     Thoughts.findOneAndUpdate(
       { _id: req.params.thoughtId },
       { $push: { reactions: req.body } },
-      { runValidators: true, new: true })
+      { runValidators: true, new: true }
+    )
       .then((thought) =>
         !thought
           ? res.status(404).json({ message: "No thought found with that ID" })
-          : res.json({ message: "You have added a new thought" })
+          : res.json({ message: "You have added a new reaction to a thought" })
       )
       .catch((err) => res.status(500).json(err));
   },
 
-  // delete a reaction by reaction ID
+  deleteReaction(req, res) {
+    console.log(res);
+    Thoughts.findOneAndUpdate(
+      { _id: req.params.thoughtId },
+      { $pull: { reactions: { reactionId: req.params.reactionsId } } },
+      { runValidators: true, new: true }
+    )
+      .then((reaction) =>
+        !reaction
+          ? res.status(404).json({ message: "No reaction found with that ID" })
+          : res.json(reaction)
+      )
+      .catch((err) => res.status(500).json(err));
+  },
 };
