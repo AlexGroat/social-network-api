@@ -4,7 +4,7 @@ const {
     getThoughts,
     getSingleThought,
     createThought,
-    // updateThought,
+    updateThought,
     // deleteThought,
     // createReaction,
     // deleteReaction,
@@ -18,8 +18,10 @@ router.route('/')
 router.route('/:id')
 .post(createThought);
 
+
 // api/thoughts/:thoughtid
 router.route('/:thoughtId')
-.get(getSingleThought);
+.get(getSingleThought)
+.put(updateThought);
 
 module.exports = router;

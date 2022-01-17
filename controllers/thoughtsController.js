@@ -26,7 +26,7 @@ module.exports = {
     console.log(body);
     // console log user id and the content of the thought json
     Thoughts.create(body)
-    // find the id of the user and push a new thought into the user thoughts array
+      // find the id of the user and push a new thought into the user thoughts array
       .then(({ _id }) => {
         return Users.findOneAndUpdate(
           { _id: params.id },
@@ -43,7 +43,19 @@ module.exports = {
   },
 
   // update a thought by id
-
+  updateThought(req, res) {
+    Thoughts.findOneAndUpdate(
+      { _id: req.params.thoughtId },
+      { $set: req.body },
+      { new: true, runValidators: true }
+    )
+      .then((thought) =>
+        !thought
+          ? res.status(404).json({ message: "No thought with this ID" })
+          : res.json(thought)
+      )
+      .catch((err) => res.status(500).json(err));
+  },
   // delete a thought by id
 
   // create a new reaction
