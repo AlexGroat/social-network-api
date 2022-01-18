@@ -26,7 +26,7 @@ this means that the server is up and running.
 
 To view a user demo please click [here](https://watch.screencastify.com/v/As3rSUDFxIeENZbThxOy)
 
-To view a thought demo please click [here](
+To view a thought demo please click [here](https://watch.screencastify.com/v/9laDoVflYyYGpOWOkbz2)
 
 ### Technologies
 
